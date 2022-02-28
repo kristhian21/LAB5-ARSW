@@ -1,0 +1,73 @@
+package edu.eci.arsw.services;
+
+import edu.eci.arsw.model.Blueprint;
+import edu.eci.arsw.persistence.BlueprintNotFoundException;
+import edu.eci.arsw.persistence.BlueprintPersistenceException;
+import edu.eci.arsw.persistence.BlueprintsPersistence;
+
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import edu.eci.arsw.persistence.impl.InMemoryBlueprintPersistence;
+import edu.eci.arsw.persistence.impl.Tuple;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+/**
+ *
+ * @author hcadavid
+ */
+@Service
+public class BluePrintsServices {
+
+    BlueprintsPersistence bpp;
+
+    public void addNewBlueprint(Blueprint bp){
+        try {
+            bpp.saveBlueprint(bp);
+        } catch (BlueprintPersistenceException e) {
+            System.out.println("No es posible guardar el plano");
+        }
+    }
+
+    public Set<Blueprint> getAllBlueprints(){
+        Map<Tuple<String, String>, Blueprint> collecion = bpp.getBlueprints();
+        Set<Tuple<String,String>> llaves = collecion.keySet();
+        HashSet<Blueprint> result = new HashSet<>();
+        for (Tuple<String,String> t: llaves) {
+            result.add(collecion.get(t));
+        }
+        return result;
+    }
+
+    /**
+     *
+     * @param author blueprint's author
+     * @param name blueprint's name
+     * @return the blueprint of the given name created by the given author
+     * @throws BlueprintNotFoundException if there is no such blueprint
+     */
+    public Blueprint getBlueprint(String author,String name) throws BlueprintNotFoundException{
+        return bpp.getBlueprint(author, name);
+    }
+
+    /**
+     *
+     * @param author blueprint's author
+     * @return all the blueprints of the given author
+     * @throws BlueprintNotFoundException if the given author doesn't exist
+     */
+    public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException{
+        return bpp.getBlueprintsByAuthor(author);
+    }
+
+
+    @Autowired
+    @Qualifier("fs")
+    public void setBpp(BlueprintsPersistence bpp) {
+        this.bpp = bpp;
+    }
+}
+
