@@ -49,6 +49,17 @@ public class BlueprintAPIController {
         }
     }
 
+    @RequestMapping(value = "/{authorName}/{bpname}",method = RequestMethod.GET)
+    public ResponseEntity<?> getBluePrint(@PathVariable("authorName") String authorName, @PathVariable("bpname") String bpName){
+        try {
+            Blueprint data = bps.getBlueprint(authorName, bpName);
+            return new ResponseEntity<>(data, HttpStatus.ACCEPTED);
+        } catch (Exception ex) {
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("Error 404", HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 }
 

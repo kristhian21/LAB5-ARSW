@@ -51,7 +51,13 @@ public class BluePrintsServices {
      * @throws BlueprintNotFoundException if there is no such blueprint
      */
     public Blueprint getBlueprint(String author,String name) throws BlueprintNotFoundException{
-        return bpp.getBlueprint(author, name);
+        Blueprint respuesta = bpp.getBlueprint(author, name);
+        if (respuesta == null){
+            throw new BlueprintNotFoundException("Plano no encontrado");
+        }
+        else {
+            return respuesta;
+        }
     }
 
     /**
