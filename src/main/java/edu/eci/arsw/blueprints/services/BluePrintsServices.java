@@ -25,12 +25,8 @@ public class BluePrintsServices {
     @Qualifier("inMemory")
     BlueprintsPersistence bpp;
 
-    public void addNewBlueprint(Blueprint bp){
-        try {
-            bpp.saveBlueprint(bp);
-        } catch (BlueprintPersistenceException e) {
-            System.out.println("No es posible guardar el plano");
-        }
+    public void addNewBlueprint(Blueprint bp) throws BlueprintPersistenceException{
+        bpp.saveBlueprint(bp);
     }
 
     public Set<Blueprint> getAllBlueprints(){

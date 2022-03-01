@@ -60,6 +60,32 @@ public class BlueprintAPIController {
         }
     }
 
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    public ResponseEntity<?> addBluePrint(@RequestBody Blueprint newBluePrint){
+        try {
+            bps.addNewBlueprint(newBluePrint);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception ex) {
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("Error 404", HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @RequestMapping(value = "/{authorName}/{bpname}", method = RequestMethod.PUT)
+    public  ResponseEntity<?> updateBluePrint(@PathVariable("authorName") String authorName, @PathVariable("bpname") String bpName, @RequestBody Blueprint updateBluePrint){
+        try {
+            Blueprint planoPorEditar = bps.getBlueprint(authorName, bpName);
+            StringBuilder respuesta = new StringBuilder();
+            respuesta.append("Antiguos puntos del plano: " + planoPorEditar.getPoints().toString() + "\n");
+            respuesta.append("Nuevos puntos del plano: " + updateBluePrint.getPoints().toString());
+            planoPorEditar.setPoints(updateBluePrint.getPoints());
+            return new ResponseEntity<>(respuesta.toString(), HttpStatus.ACCEPTED);
+        } catch (Exception ex) {
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("Error", HttpStatus.FORBIDDEN);
+        }
+    }
+
 
 }
 
