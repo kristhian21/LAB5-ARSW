@@ -14,9 +14,7 @@ import edu.eci.arsw.blueprints.services.BluePrintsServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -37,6 +35,17 @@ public class BlueprintAPIController {
         } catch (Exception ex) {
             Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>("Error al obtener los planos", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @RequestMapping(value = "/{authorName}",method = RequestMethod.GET)
+    public ResponseEntity<?> getBluePrintsByAuthor(@PathVariable("authorName") String authorName){
+        try {
+            Set<Blueprint> data = bps.getBlueprintsByAuthor(authorName);
+            return new ResponseEntity<>(data, HttpStatus.ACCEPTED);
+        } catch (Exception ex) {
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("Error 404", HttpStatus.NOT_FOUND);
         }
     }
 

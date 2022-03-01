@@ -14,5 +14,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends Exception{
-    
+
+    public static final String AUTOR_NO_ENCONTRADO = "Autor no encontrado!";
+
+    ResourceNotFoundException(String message){
+        super(message);
+    }
 }

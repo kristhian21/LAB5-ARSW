@@ -61,7 +61,13 @@ public class BluePrintsServices {
      * @throws BlueprintNotFoundException if the given author doesn't exist
      */
     public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException{
-        return bpp.getBlueprintsByAuthor(author);
+        Set<Blueprint> respuesta = bpp.getBlueprintsByAuthor(author);
+        if (respuesta.isEmpty()){
+            throw new BlueprintNotFoundException("Autor no encontrado");
+        }
+        else {
+            return respuesta;
+        }
     }
 
 }
