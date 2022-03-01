@@ -1,6 +1,4 @@
-package edu.eci.arsw.persistence.impl;
-
-import org.springframework.stereotype.Component;
+package edu.eci.arsw.blueprints.persistence.impl;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package edu.eci.arsw.model;
+package edu.eci.arsw.blueprints.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eci.arsw.persistence;
+package edu.eci.arsw.blueprints.persistence;
 
-import edu.eci.arsw.model.Blueprint;
-import edu.eci.arsw.persistence.impl.Tuple;
+import edu.eci.arsw.blueprints.model.Blueprint;
+import edu.eci.arsw.blueprints.persistence.impl.Tuple;
 
 import java.util.HashMap;
 import java.util.HashSet;

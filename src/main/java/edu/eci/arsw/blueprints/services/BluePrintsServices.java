@@ -1,16 +1,15 @@
-package edu.eci.arsw.services;
+package edu.eci.arsw.blueprints.services;
 
-import edu.eci.arsw.model.Blueprint;
-import edu.eci.arsw.persistence.BlueprintNotFoundException;
-import edu.eci.arsw.persistence.BlueprintPersistenceException;
-import edu.eci.arsw.persistence.BlueprintsPersistence;
+import edu.eci.arsw.blueprints.model.Blueprint;
+import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
+import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
+import edu.eci.arsw.blueprints.persistence.BlueprintsPersistence;
 
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import edu.eci.arsw.persistence.impl.InMemoryBlueprintPersistence;
-import edu.eci.arsw.persistence.impl.Tuple;
+import edu.eci.arsw.blueprints.persistence.impl.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -22,6 +21,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class BluePrintsServices {
 
+    @Autowired
+    @Qualifier("inMemory")
     BlueprintsPersistence bpp;
 
     public void addNewBlueprint(Blueprint bp){
@@ -63,11 +64,5 @@ public class BluePrintsServices {
         return bpp.getBlueprintsByAuthor(author);
     }
 
-
-    @Autowired
-    @Qualifier("fs")
-    public void setBpp(BlueprintsPersistence bpp) {
-        this.bpp = bpp;
-    }
 }
 
