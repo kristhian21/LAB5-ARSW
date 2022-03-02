@@ -8,10 +8,8 @@ package edu.eci.arsw.blueprints.persistence;
 import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.persistence.impl.Tuple;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -19,7 +17,7 @@ import java.util.Set;
  */
 public abstract class BlueprintsPersistence {
 
-    public final Map<Tuple<String,String>,Blueprint> blueprints=new HashMap<>();
+    public final AbstractMap<Tuple<String,String>,Blueprint> blueprints = new ConcurrentHashMap<>();
     
     /**
      * 
