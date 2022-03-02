@@ -1,0 +1,21 @@
+Condiciones de carrera: 
+ 
+Las condiciones de carrera que se llegan a presentar se encuentran:
+Dentro de el metodo que agrega un nuevo plano.
+Si se desea hacer dos Puts al mismo tiempo. 
+si se desea hacer un Get al mismo recurso al que se le esta haciendo un Put. 
+
+Regiones criticas: 
+
+las regiones criticas del programa serian: 
+
+la collecion de los Blueprints, ya que es donde se encuentran guardados todos los planos y es donde se llegan a presentar los problemas concurrentes de la modificacion
+de los valores y las variables. 
+
+Todo esto se debe a que la coleccion no es thread-safe y causa que apliquen las regiones criticas y las condiciones de carrera, nuestra solucion para el problema, seria en 
+cambiar Blueprintes de hashmap a concurrenthashmap, solucionando asi los problemas de concurrencia de el programa. 
+
+Una tabla hash que admita la simultaneidad total de las recuperaciones y la alta simultaneidad esperada para las actualizaciones. Esta clase obedece a la misma especificación 
+funcional que Hashtable, e incluye versiones de métodos correspondientes a cada método de Hashtable. Sin embargo, a pesar de que todas las operaciones son seguras para subprocesos, 
+las operaciones de recuperación no implican el bloqueo, y no hay ningún soporte para bloquear toda la tabla de una manera que impida todo acceso. Esta clase es totalmente interoperable 
+con Hashtable en programas que se basan en su seguridad de subprocesos pero no en sus detalles de sincronización.
